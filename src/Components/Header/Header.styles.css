@@ -1,0 +1,15 @@
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.coloredBG {
+    height: 50px;
+    background: black;
+}
+
+.img {
+    margin-top: -25px;
+    width: 100px;
+    height: 50px;
+}
