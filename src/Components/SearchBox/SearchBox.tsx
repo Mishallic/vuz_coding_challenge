@@ -11,7 +11,8 @@ type SearchBoxProps = {
 }
 const SearchBox = ({searchInput, setSearchInput}: SearchBoxProps) => {
     const handleInputChange = (e: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setSearchInput(e.target?.value)
+        const target = e.target as HTMLTextAreaElement;
+        setSearchInput(target.value);
     }
     return (
         <Paper

@@ -94,7 +94,8 @@ const MainTable = ({data, selected, setSelected}: mainTableProps) => {
     const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
         const selectedIndex = selected.indexOf(id);
         let newSelected: number[] = [];
-
+        if(selected.length === 6 && selectedIndex === -1)
+            return;
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
@@ -113,7 +114,7 @@ const MainTable = ({data, selected, setSelected}: mainTableProps) => {
 
     const getTags = (tags: CharacterTag[]) => {
         if (tags)
-            return tags.map(el => el.tag_name).join(',');
+            return tags.map(el => el.tag_name).join(', ');
     }
     const getAbility = (abilities: CharacterAbility[], abilityName: AbilityName) => {
         if (abilities)
@@ -158,8 +159,16 @@ const MainTable = ({data, selected, setSelected}: mainTableProps) => {
                                             id={labelId}
                                             scope="row"
                                             padding="none"
+                                            style={{}}
                                         >
-                                            {row.name}
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center'
+                                            }}>
+                                                <img style={{borderRadius: '50%', marginRight: 20, border:'1px solid blue'}} width={30}
+                                                     height={30} src={row.thumbnail} alt='thumbnail'/>
+                                                <div><b>{row.name}</b></div>
+                                            </div>
                                         </TableCell>
                                         <TableCell align="right">{getTags(row.tags)}</TableCell>
                                         <TableCell align="right">{getAbility(row.abilities, 'Power')}</TableCell>

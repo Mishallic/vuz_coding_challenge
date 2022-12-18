@@ -1,0 +1,44 @@
+.root {
+    display: flex;
+    height: 40vh;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    flex-direction: column;
+}
+
+.imagesContainer {
+    height: 100%;
+    display: flex;
+    margin: 3% 0 0 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.imageContainer {
+    margin: 0 .5% 0 0;
+}
+
+.image {
+    border-radius: 50%;
+    border: 1px solid blue;
+    width: 100px;
+}
+
+.text {
+    width:100%;
+    text-align: center;
+}
+
+.abilityScore{
+    font-weight: bold;
+    font-size: 2em;
+}
+.abilityContainer {
+    margin: 3%;
+}
+
+.abilitiesContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
