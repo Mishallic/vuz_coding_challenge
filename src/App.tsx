@@ -4,7 +4,7 @@ import type {Character, CharacterAbility} from './types'
 import MainTable from "./Components/Table/Table";
 import Layout from "./Components/Layout/Layout";
 import * as React from "react";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import SearchBox from "./Components/SearchBox/SearchBox";
 import SelectedChampions from "./Components/SelectedChampions/SelectedChampions";
 
@@ -16,24 +16,23 @@ function App() {
     const [searchInput, setSearchInput] = React.useState<string>('');
     const [filteredData, setFilteredData] = React.useState<Character[]>(data);
     const [currentDataLength, setCurrentDataLength] = React.useState<number>(20);
-    const [allTags, setAllTags] = React.useState<string[]>([]);
+    // const [allTags, setAllTags] = React.useState<string[]>([]);
 
     const isBottom = (el: HTMLElement | null) => {
         if (el)
             return el.getBoundingClientRect().bottom <= window.innerHeight;
     }
-    const trackScrolling = () => {
+    const trackScrolling = useCallback(() => {
         const wrappedElement = document.getElementById('tableContainer');
         if (isBottom(wrappedElement)) {
             document.removeEventListener('scroll', trackScrolling);
             loadMoreData();
+            document.addEventListener('scroll', trackScrolling);
         }
-    };
+    }, [])
 
-    const loadMoreData = () => {
-        setCurrentDataLength(state => state + 10);
-        document.addEventListener('scroll', trackScrolling);
-    }
+    const loadMoreData = () => setCurrentDataLength(state => state + 10);
+
     const reducer = (acc: any, curr: CharacterAbility[]): any => {
         acc = {...acc, power: [...acc.power, curr?.find(ability => ability.abilityName === 'Power')?.abilityScore]}
         acc = {
@@ -66,8 +65,7 @@ function App() {
             });
             const selectedImages = selectedChamps.map(champ => champ.image);
             setSelectedData({abilities: groupedAbilities, images: selectedImages})
-        }
-        else  setSelectedData({abilities: {}, images: []})
+        } else setSelectedData({abilities: {}, images: []})
     }
 
     useEffect(() => {
@@ -75,14 +73,15 @@ function App() {
         return () => {
             document.removeEventListener('scroll', trackScrolling);
         }
-    }, []);
+    }, [trackScrolling]);
 
     useEffect(() => {
-        console.log(data.map(champ => champ.tags?.map(tag => tag.tag_name)))
-
+        // console.log(data.map(champ => champ.tags?.map(tag => tag.tag_name)))
+        // flatten all tags, render on screen.
     }, [])
 
     useEffect(() => {
+        // handle tag selected tags filtering before text.
         const filteredData = data.filter(el => el.name.toLowerCase().includes(searchInput.toLowerCase()) ||  // name match
             (el?.tags?.map(tag => tag.tag_name).some(el => el.includes(searchInput.toLowerCase()))));        // tag match
         setFilteredData(filteredData);
