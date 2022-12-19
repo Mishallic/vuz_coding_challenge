@@ -10,3 +10,5 @@ What I would do to improve on my solution?
 - parse the tags and render them on screen, also apply them to the filter. (comments added in the code)
 - optimize images.
 - optimize the select mechanism, it's kinda slow, and will be slower if there was more records on the screen.
+- make sure data is consistant(all characters have tags and abilities)
+- cover all search performance edge cases.

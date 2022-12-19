@@ -34,18 +34,12 @@ function App() {
     const loadMoreData = () => setCurrentDataLength(state => state + 10);
 
     const reducer = (acc: any, curr: CharacterAbility[]): any => {
-        acc = {...acc, power: [...acc.power, curr?.find(ability => ability.abilityName === 'Power')?.abilityScore]}
         acc = {
             ...acc,
-            mobility: [...acc.mobility, curr?.find(ability => ability.abilityName === 'Mobility')?.abilityScore]
-        }
-        acc = {...acc, energy: [...acc.energy, curr?.find(ability => ability.abilityName === 'Energy')?.abilityScore]}
-        acc = {
-            ...acc,
-            survivability: [...acc.survivability, curr?.find(ability => ability.abilityName === 'Survivability')?.abilityScore]
-        }
-        acc = {
-            ...acc,
+            power: [...acc.power, curr?.find(ability => ability.abilityName === 'Power')?.abilityScore],
+            mobility: [...acc.mobility, curr?.find(ability => ability.abilityName === 'Mobility')?.abilityScore],
+            energy: [...acc.energy, curr?.find(ability => ability.abilityName === 'Energy')?.abilityScore],
+            survivability: [...acc.survivability, curr?.find(ability => ability.abilityName === 'Survivability')?.abilityScore],
             technique: [...acc.technique, curr?.find(ability => ability.abilityName === 'Technique')?.abilityScore]
         }
         return acc;
@@ -82,8 +76,7 @@ function App() {
 
     useEffect(() => {
         // handle tag selected tags filtering before text.
-        const filteredData = data.filter(el => el.name.toLowerCase().includes(searchInput.toLowerCase()) ||  // name match
-            (el?.tags?.map(tag => tag.tag_name).some(el => el.includes(searchInput.toLowerCase()))));        // tag match
+        const filteredData = data.filter(el => el.name.toLowerCase().includes(searchInput.toLowerCase()));
         setFilteredData(filteredData);
         setCurrentDataLength(20);
     }, [searchInput])
