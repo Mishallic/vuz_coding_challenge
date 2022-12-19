@@ -1,0 +1,12 @@
+What I would do to improve on my solution?
+- transform the data: 1- flatten the tags to become an array of strings 2- maybe transform the abilities to an object.
+- create new types for transformed data.
+- create helpers for functions such as reducer, getabilities, gettags, average.
+- disect the table component into multiple components: table, tableHeader, tableCell.
+- group types in a dedicated file like the one provided by the challenge.
+- create a custom hook for the scrolling listener.
+- create 'go to top' button.
+- make sure the page is completely responsive and styling.
+- parse the tags and render them on screen, also apply them to the filter. (comments added in the code)
+- optimize images.
+- optimize the select mechanism, it's kinda slow, and will be slower if there was more records on the screen.
