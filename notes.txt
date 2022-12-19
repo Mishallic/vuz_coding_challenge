@@ -13,3 +13,4 @@ What I would do to improve on my solution?
 - make sure data is consistant(all characters have tags and abilities)
 - cover all search performance edge cases.
 - organize and optimize imports.
+- have fallback images.

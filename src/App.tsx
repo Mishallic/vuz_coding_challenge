@@ -47,7 +47,7 @@ function App() {
 
     const handleSelected = (ids: number[]) => {
         setSelected(ids);
-        const selectedChamps = data.filter(el => ids.includes(el.id)) || [];
+        const selectedChamps = data.filter(el => ids.includes(el.id));
         if (selectedChamps.length) {
             const champsAbilities = selectedChamps.map(champ => champ.abilities)
             let groupedAbilities = champsAbilities.reduce(reducer, {
